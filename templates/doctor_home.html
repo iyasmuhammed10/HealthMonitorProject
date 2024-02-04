@@ -1,0 +1,23 @@
+import requests
+import time
+import random
+
+# Example Python code to send data to a backend
+def send_data_to_backend(temperature, pulse_rate, respiration_rate):
+    api_url = 'http://your-backend-server/api/collect_data'
+    payload = {'temperature': temperature, 'pulse_rate': pulse_rate, 'respiration_rate': respiration_rate}
+    
+    response = requests.post(api_url, data=payload)
+
+    print(f"Data sent: {payload}")
+    print(f"Response: {response.text}")
+
+# Simulate data transmission
+while True:
+    temperature = round(random.uniform(36.0, 38.0), 2)
+    pulse_rate = random.randint(60, 120)
+    respiration_rate = random.randint(10, 25)
+
+    send_data_to_backend(temperature, pulse_rate, respiration_rate)
+
+    time.sleep(1)  # Simulate sending data every second

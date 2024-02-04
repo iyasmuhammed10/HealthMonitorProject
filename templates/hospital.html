@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, 
+						initial-scale=1.0">
+	<title>Hospital</title>
+    <link rel="stylesheet" href="{% static 'hospital.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <div>
+        {% for message in messages %}
+        <div role="alert">
+            <strong>Message:</strong> {{ message }}
+            <button type="button" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+
+	<!-- container div -->
+	<div class="container">
+
+		<!-- upper button section to select
+			the login or signup form -->
+		<div class="slider"></div>
+		<div class="btn">
+			<button class="login">Add Patient</button>
+			<button class="signup">Add Doctor</button>
+		</div>
+
+		<!-- Form section that contains the
+			login and the signup form -->
+		<div class="form-section">
+
+			<!-- login form -->
+            <form action="/hospitals/addpatient" name="patient" method="POST">
+                {% csrf_token %}
+                <div class="login-box">
+                    <input type="text" class="name ele" placeholder="Enter your name" name="name">
+                    <input type="number" class="name ele" placeholder="Enter your age" name="age">
+                    <input type="number" class="name ele" placeholder="Enter your phone number" name="phone_number0">
+                    <input type="number" class="name ele" placeholder="Enter an alternative phone number" name="phone_number1">
+                    <select id="gender" class="name ele" name="gender">
+                        <option class="name ele" value="male">Male</option>
+                        <option class="name ele" value="male">Female</option>
+                    </select>
+                    <input type="number" class="name ele" placeholder="Enter your device ID" name="device_ID">
+                    <input type="password" class="password ele" placeholder="Enter your password" name="password">
+                    <input type="number" class="name ele" placeholder="Enter your doctor ID" name="Doc_id">
+                    <button type="submit" class="clkbtn">Add</button>
+                </div>
+            </form>
+			<!-- signup form -->
+            <form action="/hospitals/adddoctor" name="patient" method="POST">
+                {% csrf_token %}
+                <div class="signup-box">
+                    <input type="number" class="name ele" readonly value="{{Doc_id}}" name="Doc_id">
+                    <input type="text" class="name ele" placeholder="Enter Doctor name" name="name">
+                   
+                    <button type="submit" class="clkbtn">Add Doctor</button>
+                </div>
+            </form>
+		</div>
+	</div>
+	<script src="index.js"></script>
+</body>
+<script>
+    let signup = document.querySelector(".signup");
+    let login = document.querySelector(".login");
+    let slider = document.querySelector(".slider");
+    let formSection = document.querySelector(".form-section");
+
+    signup.addEventListener("click", () => {
+        slider.classList.add("moveslider");
+        formSection.classList.add("form-section-move");
+    });
+
+    login.addEventListener("click", () => {
+        slider.classList.remove("moveslider");
+        formSection.classList.remove("form-section-move");
+    });
+</script>
+</html>

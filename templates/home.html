@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Monitoring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .normal {
+            color: green;
+        }
+        .abnormal {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+        
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse visible-xs">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Dashboard</a></li>
+        <li><a href="#">Age</a></li>
+        <li><a href="#">Gender</a></li>
+        <li><a href="#">Geo</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav hidden-xs">
+      <h2>Logo</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1">Dashboard</a></li>
+        <li><a href="#section3">Emergency</a></li>
+        <li><a href="#section2">Patients</a></li>
+        <li><a href="#section3">Doctors</a></li>
+      </ul><br>
+    </div>
+    <br>
+    
+    <div class="col-sm-9">
+      <div class="well">
+        <h4><b>Ashwin</b></h4>
+        <p><b>ID : </b>8965725</p>
+      </div>
+      
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="well" style="height:200px">
+            <h4>Pulse Rate</h4>
+            <div id="pulseRate" class="normal">
+                <h2><span id="pulseValue"><b>75</b></span> BPM</h2>
+            </div> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well" style="height:200px">
+            <h4>Respiratory Rate</h4>
+            <div id="respiratoryRate" class="normal">
+                <h2> <span id="respiratoryValue"><b>16</b></span> breaths/min</h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well" style="height:200px">
+            <h4>Body Temperature</h4>
+            <div id="bodyTemperature" class="normal">
+                <h2><span id="temperatureValue"><b>98.6</b></span> °F</h2>
+            </div> 
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3 ">
+          <button class="well shadow" style="background-color: #337ab7; width:300px;" >
+            <h5><b>Call Patient</b></h5> 
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+    
+
+    
+
+    <script>
+        function updateValues() {
+            // Simulate changing values each second
+            const pulse = Math.floor(Math.random() * 30) + 80; // Pulse rate between 60 and 90 BPM
+            const respiratory = Math.floor(Math.random() * 6) + 15; // Respiratory rate between 15 and 20 breaths/min
+            const temperature = (Math.random() * 2) + 98.4; // Body temperature between 98.4 and 100.4 °F
+
+            // Update UI
+            document.getElementById('pulseValue').innerText = pulse;
+            document.getElementById('respiratoryValue').innerText = respiratory;
+            document.getElementById('temperatureValue').innerText = temperature.toFixed(1);
+
+            // Check for abnormal values
+            checkAbnormality('pulseRate', pulse, 60, 90);
+            checkAbnormality('respiratoryRate', respiratory, 15, 20);
+            checkAbnormality('bodyTemperature', temperature, 98.4, 100.4);
+        }
+
+        function checkAbnormality(elementId, value, lowerBound, upperBound) {
+            const element = document.getElementById(elementId);
+
+            if (value < lowerBound || value > upperBound) {
+                element.classList.add('abnormal');
+            } else {
+                element.classList.remove('abnormal');
+                element.classList.add('normal');
+            }
+        }
+
+        // Update values every second
+        setInterval(updateValues, 1000);
+
+        // Initial update
+        updateValues();
+    </script>
+</body>
+</html>
